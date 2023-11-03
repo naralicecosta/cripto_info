@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom"
+import { Header } from "../header"
 
 export function Layout(){
     return(
         <>
-            <h1>Header do projeto</h1>
+            <Header />
             <Outlet />
         </>
     )
