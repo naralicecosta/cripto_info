@@ -16,6 +16,9 @@ export function Home(){
                 <button type="submit">
                     <BiSearch size={30} color="#fff" />
                 </button>
+                <button>
+                    
+                </button>
             </form>
 
             <table>
