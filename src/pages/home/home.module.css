@@ -1,3 +1,20 @@
 .container{
-    
+    margin: 0 10px; /* não ficar grudado na interface*/
+    }
+.form{
+    width: 100%;
+    display: flex;
+    gap: 14px
+}
+.form input{
+    width: 100%;
+    height:44px ;
+    border-radius: 8px;
+    padding: 0 8px;
+    outline: none;
+    border: 0;
+}
+.form button{
+    background: transparent;
+    border: 0;
 }
