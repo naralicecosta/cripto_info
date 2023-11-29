@@ -41,20 +41,20 @@ table th {
     font-size: 14px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: #fff
+    color: #FFF
 }
 .tdLabel span{
     font-weight: bold;
     font-size: 18px;
-    color: #fff
+    color: #FFF
 }
-.tdLabel, .tdProfit, .tdloss{
-    color: #bbb
+.tdLabel, .tdProfit, .tdLoss{
+    color: #BBB
 }
 .tdProfit{
     color: #12f98a
 }
-.tdloss{
+.tdLoss{
     color: #f91257
 }
 .link{

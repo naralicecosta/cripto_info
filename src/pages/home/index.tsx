@@ -14,6 +14,7 @@ interface CoinProps{
     market_cap: string
     formatedPrice: string;
     formatedMarket: string;
+    numberDelta: number;
 
 }
 interface DataProps{
@@ -21,7 +22,6 @@ interface DataProps{
 }
 export function Home(){
     const [coins, setCoins] = useState<CoinProps[]>([])//mostrando que é uma lista e não um objeto
-    console.log(coins)
 
     useEffect(() => {
         // criando função e chamando para ser executada
@@ -42,15 +42,12 @@ export function Home(){
                             ...item,
                             formatedPrice: price.format(Number(item.price)),
                             formatedMarket: price.format(Number(item.market_cap)),
+                            numberDelta: parseFloat(item.delta_24h.replace(",", ".")) // onde for virgula, colocar ponto
                         }
-
                         return formated
                     })
                     setCoins(formatResult)
-
                 })
-            
-
         }
         getData();
      }, [])
@@ -80,26 +77,30 @@ export function Home(){
                 </thead>
 
                 <tbody id='tbody'>
-                    <tr className={styles.tr}>
+                    
+                    {/**renderizando a lista */}
+                    {coins.map(coin => (
+                        <tr key={coin.name} className={styles.tr}>
                         <td className={styles.tdLabel} data-label="Moeda">
-                            <Link className={styles.link} to='/detail/btc'>
-                                <span>Bitcoin</span> |BTC
+                            <Link className={styles.link} to={`/detail/${coin.symbol}`}>
+                                <span>{coin.name}</span> | {coin.symbol}
                             </Link>
                         </td>
 
                         <td className={styles.tdLabel} data-label="Mercado">
-                            R$ 1212
+                            {coin.formatedMarket}
                         </td>
 
                         <td className={styles.tdLabel} data-label="Preço">
-                            R$ 40.962
+                            {coin.formatedPrice}
                         </td>
 
-                        <td className={styles.tdProfit} data-label="Volume">
-                            <span>-5.3</span>
+                        <td className={coin.numberDelta >= 0 ? styles.tdProfit : styles.tdLoss} data-label="Volume"> {/**verificação se o numero for maior que 0 ficar verde e se for menor fica vermelho */}
+                            <span>{coin.delta_24h}</span>
                         </td>
                     </tr>
 
+                    ))}
                 </tbody>
             </table>
 
