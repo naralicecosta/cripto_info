@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './home.module.css'
-import  { BiSearch }  from 'react-icons'
+import  { BiSearch }  from 'react-icons/bi'
 
 import { Link } from 'react-router-dom'
 

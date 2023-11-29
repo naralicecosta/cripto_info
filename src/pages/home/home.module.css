@@ -59,17 +59,18 @@ table th {
 }
 .link{
     text-decoration: none;
-    color: #fff
-    transition: color 0.5s;
+    color: #fff;
+    transition: 0.5s;
 }
 .link:hover{
-    color: #30beff
+    color: #30beff;
 }
 table th,
 table td {
     padding: 14px;
     text-align: center;
 }
+/*adicionando responsividade para quando a tela for menor que 600px (celulares)*/
 @media screen and (max-width: 600px) {
     table{
         border: 0;
