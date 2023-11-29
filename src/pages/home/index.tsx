@@ -1,7 +1,7 @@
-import {useEffect, useState} from 'react'
+import {FormEvent, useEffect, useState} from 'react'
 import styles from './home.module.css'
 import  { BiSearch }  from 'react-icons/bi'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 //https://sujeitoprogramador.com/api-cripto/?key=67f9141787211428
 
@@ -22,6 +22,8 @@ interface DataProps{
 }
 export function Home(){
     const [coins, setCoins] = useState<CoinProps[]>([])//mostrando que é uma lista e não um objeto
+    const [inputValue, setInputValue] = useState("")
+    const navigate = useNavigate()
 
     useEffect(() => {
         // criando função e chamando para ser executada
@@ -51,12 +53,22 @@ export function Home(){
         }
         getData();
      }, [])
+
+     function handleSearch(e: FormEvent){
+            e.preventDefault()
+            if(inputValue === "")return;
+            navigate(`/detail${inputValue}`)
+     }
+
+
     return(
     <>
         {/**area principal do nosso site */}
         <main className={styles.container}>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={handleSearch}>
                 <input placeholder="Digite o simbolo da moeda: BTC..." 
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
                 />
                 <button type="submit">
                     <BiSearch size={30} color="#fff" />
