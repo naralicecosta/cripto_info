@@ -107,7 +107,7 @@ export function Home(){
                             {coin.formatedPrice}
                         </td>
 
-                        <td className={coin.numberDelta >= 0 ? styles.tdProfit : styles.tdLoss} data-label="Volume"> {/**verificação se o numero for maior que 0 ficar verde e se for menor fica vermelho */}
+                        <td className={coin.numberDelta  >= 0 ? styles.tdProfit : styles.tdLoss} data-label="Volume"> {/**verificação se o numero for maior que 0 ficar verde e se for menor fica vermelho */}
                             <span>{coin.delta_24h}</span>
                         </td>
                     </tr>

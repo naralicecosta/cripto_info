@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styles from './detail.module.css'
 
 interface CoinProp{
@@ -16,6 +16,7 @@ interface CoinProp{
         formatedLowPrice: string;
         formatedHighprice: string;
         error?: string;
+        numberDelta: number
     }
 
 
@@ -24,11 +25,17 @@ export function Detail(){
     const [detail, setDetail] = useState<CoinProp>()
     const [loading, setLoading] = useState(true)
 
+    const navigate = useNavigate()
+
     useEffect(() => {
         function getData(){
             fetch(`https://sujeitoprogramador.com/api-cripto/coin/?key=b4cd8f8fb3de94c6&pref=EUR&symbol=${cripto}`)
             .then(response => response.json())
             .then((data: CoinProp) => {
+                if(data.error){ 
+                    navigate("/")
+
+                }
                 const price = Intl.NumberFormat("pt-BR",{
                     style: "currency",
                     currency: 'BRL'
@@ -38,7 +45,8 @@ export function Detail(){
                     formatedPrice: price.format(Number(data.price)),
                     formatedMarket: price.format(Number(data.market_cap)),
                     formatedLowPrice: price.format(Number(data.low_24h)),
-                    formatedHighprice: price.format(Number(data.high_24h))
+                    formatedHighprice: price.format(Number(data.high_24h)),
+                    numberDelta: parseFloat(data.delta_24h.replace(",","."))
                 }
                 setDetail(resultData);
                 setLoading(false);
@@ -71,7 +79,7 @@ export function Detail(){
                 </p>
                 <p>
                     <strong>Delta 24h:</strong> 
-                    <span className={Number(detail?.delta_24h) >= 0 ? styles.profit : styles.loss}>
+                    <span className={detail?.numberDelta && detail?.numberDelta >= 0 ? styles.profit : styles.loss}>
                     {detail?.delta_24h}
                     </span>
                 </p>
